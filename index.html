@@ -89,7 +89,7 @@
 
         <!-- WELCOME CARD -->
         <div class="dashboard" style="text-align: center; margin-top: 10px;">
-            <div class="tournament-name" id="welcome-message">Bienvenido Socio</div>
+            <div class="tournament-name" id="welcome-message">Bienvenido Jugador</div>
             <div style="display: flex; gap: 10px; margin-top: 25px;">
                 <button class="action-button" id="main-action-btn" style="flex: 2; height: 45px; font-size: 0.9rem; margin: 0;" onclick="handleMainAction()">Iniciar Nueva Ronda</button>
                 <button class="action-button" id="templates-btn" style="flex: 1; height: 45px; font-size: 0.9rem; margin: 0; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border);" onclick="alertPremium('Plantillas', 'La funcionalidad de plantillas estará disponible próximamente.', 'fa-clone')">Plantillas</button>
@@ -176,15 +176,15 @@
                 </div>
                 <div style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 18px;">
                     <div style="min-width: 30px; height: 30px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.8rem;">2</div>
-                    <div><div style="font-weight: 700; font-size: 0.85rem;">El Lobo elige un Socio</div><div style="font-size: 0.7rem; color: var(--text-secondary);">Puede elegir a cualquier jugador como aliado, o jugar SOLO contra los 3.</div></div>
+                    <div><div style="font-weight: 700; font-size: 0.85rem;">El Lobo elige un Jugador</div><div style="font-size: 0.7rem; color: var(--text-secondary);">Puede elegir a cualquier jugador como aliado, o jugar SOLO contra los 3.</div></div>
                 </div>
                 <div style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 18px;">
                     <div style="min-width: 30px; height: 30px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.8rem;">3</div>
-                    <div><div style="font-weight: 700; font-size: 0.85rem;">Mejor Bola Gana</div><div style="font-size: 0.7rem; color: var(--text-secondary);">Se compara el mejor score NETO del equipo del Lobo contra el de los contrarios.</div></div>
+                    <div><div style="font-weight: 700; font-size: 0.85rem;">Mejor Bola Gana</div><div style="font-size: 0.7rem; color: var(--text-secondary);">Se compara el mejor score NETO del grupo del Lobo contra el de los contrarios.</div></div>
                 </div>
                 <div style="display: flex; gap: 12px; align-items: flex-start; margin-bottom: 18px;">
                     <div style="min-width: 30px; height: 30px; background: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 0.8rem;">4</div>
-                    <div><div style="font-weight: 700; font-size: 0.85rem;">Puntos por Hoyo</div><div style="font-size: 0.7rem; color: var(--text-secondary);">Con socio: 1 punto. Solo (Lone Wolf): puntos dobles. ¡Alto riesgo, alta recompensa!</div></div>
+                    <div><div style="font-weight: 700; font-size: 0.85rem;">Puntos por Hoyo</div><div style="font-size: 0.7rem; color: var(--text-secondary);">Con jugador: 1 punto. Solo (Lone Wolf): puntos dobles. ¡Alto riesgo, alta recompensa!</div></div>
                 </div>
             </div>
             <button class="action-button" style="margin-top: 20px;" onclick="document.getElementById('wolf-info-overlay').classList.remove('active'); showScreen('setup-round');"><i class="fas fa-play" style="margin-right: 8px;"></i> JUGAR WOLF</button>
@@ -203,9 +203,10 @@
                 <!-- Se llena con JS -->
             </div>
             <div class="score-input-container" id="score-inputs"></div>
-            <div id="game-action-buttons" class="padding" style="padding: 20px; display: flex; gap: 10px;">
-                <button class="action-button" id="btn-continuar" style="flex: 2; background: #4caf50;" onclick="handleContinuar()">CONTINUAR</button>
-                <button class="action-button" style="flex: 1; background: rgba(255,255,255,0.05); border: 1px solid #ff4d4d; color: #ff4d4d;" onclick="abandonarPartida()">SALIR</button>
+            <div id="game-action-buttons" class="padding" style="padding: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+                <button class="action-button" id="btn-continuar" style="flex: 2; min-width: 150px; background: #4caf50;" onclick="handleContinuar()">CONTINUAR</button>
+                <button class="action-button" id="btn-finalizar-9" style="flex: 1; min-width: 120px; background: #d14d28; display: none;" onclick="finalizarHoyo9()">FINALIZAR JUGADA</button>
+                <button class="action-button" id="btn-salir-juego" style="flex: 1; min-width: 100px; background: rgba(255,255,255,0.05); border: 1px solid #ff4d4d; color: #ff4d4d;" onclick="abandonarPartida()">SALIR</button>
             </div>
             <div id="result-box" class="dashboard" style="margin: 20px; display: none;">
                 <div class="tournament-name" id="result-status"></div>
@@ -336,7 +337,7 @@
                 </div>
 
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 30px; margin-bottom: 15px; padding: 0 10px;">
-                    <div style="font-size: 0.8rem; font-weight: 800; color: var(--text-secondary); letter-spacing: 1px;">SOCIOS DEL GRUPO</div>
+                    <div style="font-size: 0.8rem; font-weight: 800; color: var(--text-secondary); letter-spacing: 1px;">JUGADORES DEL GRUPO</div>
                     <button onclick="addMoreMembersToGroup()" style="background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 20px; font-size: 0.6rem; padding: 5px 12px; font-weight: 700; cursor: pointer;">
                         <i class="fas fa-plus"></i> AGREGAR
                     </button>
@@ -376,23 +377,11 @@
                         <label>Tee (Mesa)</label>
                         <select id="setup-tee-select" style="width: 100%; padding: 14px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); border-radius: 16px; color: white; font-weight: 600;"></select>
                     </div>
-                    <!-- SECCIÓN DE EQUIPOS (DISCRETA) -->
-                    <div id="setup-teams-section" style="margin-bottom: 20px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-                            <div style="display: flex; align-items: center; gap: 10px;">
-                                <label style="margin-bottom: 0; font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-secondary);">Equipos</label>
-                                <button id="btn-balance-teams" onclick="autoBalanceTeams()" style="display: none; background: rgba(209, 77, 40, 0.1); border: 1px solid var(--accent-color); color: var(--accent-color); border-radius: 12px; padding: 2px 8px; font-size: 0.55rem; font-weight: 800; cursor: pointer; letter-spacing: 0.5px;"><i class="fas fa-balance-scale"></i> BALANCEAR</button>
-                            </div>
-                            <div id="setup-players-display-pill" style="font-size: 0.7rem; font-weight: 800; color: white; background: var(--accent-color); padding: 2px 10px; border-radius: 20px; box-shadow: 0 2px 10px rgba(209, 77, 40, 0.2);"><span id="setup-players-display">0</span> JUGADORES</div>
-                        </div>
-                        <div id="setup-teams-list" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 10px;">
-                            <!-- Cards compactas -->
-                        </div>
-                    </div>
+
 
                     <label>Formatos</label>
                     <div class="game-grid" style="grid-template-columns: 1fr 1fr;">
-                        <div class="game-card mini active" id="setup-game-medal" onclick="setSetupGame('Medal')">Medal Play</div>
+                        <div class="game-card mini" id="setup-game-medal" onclick="setSetupGame('Medal')">Medal Play</div>
                         <div class="game-card mini" id="setup-game-wolf" onclick="setSetupGame('Wolf')">Wolf</div>
                         <div class="game-card mini" onclick="alertPremium('En Desarrollo', 'El modo Skins estará disponible muy pronto.')" style="opacity: 0.4; position: relative; cursor: not-allowed; border-color: transparent;">
                             Skins
@@ -408,23 +397,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="dashboard" style="margin-top: 15px;">
-                    <label>Hoyos</label>
-                    <div style="display: flex; gap: 10px; margin-bottom: 15px;">
-                        <button id="btn-holes-9" onclick="setSetupHoles(9)" class="action-button" style="flex: 1; background: transparent;">9 Hoyos</button>
-                        <button id="btn-holes-18" onclick="setSetupHoles(18)" class="action-button" style="flex: 1;">18 Hoyos</button>
-                    </div>
 
-                    <label>Apuesta</label>
-                    <div style="display: flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); border-radius: 16px; padding: 5px 15px;">
-                        <span style="color: var(--accent-color); font-weight: 800;">$</span>
-                        <input type="text" inputmode="none" readonly id="setup-bet-amount" placeholder="0.00" onclick="openNumpad(this)" style="width: 100%; padding: 10px 0; background: transparent; border: none; color: white; font-weight: 600; font-size: 1rem; outline: none; cursor: pointer;">
-                    </div>
-                </div>
                 
-                <button class="action-button" style="margin-top: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); font-size: 0.75rem; color: white;" onclick="openGameSettings()"><i class="fas fa-sliders-h" style="margin-right: 8px; color: var(--accent-color);"></i> AJUSTAR APUESTAS Y SALIDAS</button>
+
+
+                <button class="action-button" style="margin-top: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); font-size: 0.75rem; color: white;" onclick="openGameSettings()"><i class="fas fa-sliders-h" style="margin-right: 8px; color: var(--accent-color);"></i> CONFIGURACIÓN AVANZADA</button>
                 
-                <!-- Eliminado el contenedor de invitación previa, ahora se asignan directamente en los equipos -->
                 <button class="action-button" style="margin-top: 25px;" onclick="createLiveGame()">EMPEZAR RONDA</button>
             </div>
         </div>
@@ -440,7 +418,7 @@
             <div style="padding: 15px 20px;">
                 <div class="search-container" style="position: relative; margin-bottom: 20px;">
                     <i class="fas fa-search" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); font-size: 0.9rem;"></i>
-                    <input type="text" id="friend-search-input" placeholder="Buscar socios por nombre..." onkeyup="filterFriends()" style="width: 100%; padding: 14px 15px 14px 45px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 16px; color: white; font-size: 0.9rem; outline: none; transition: all 0.3s ease;">
+                    <input type="text" id="friend-search-input" placeholder="Buscar jugadores por nombre..." onkeyup="filterFriends()" style="width: 100%; padding: 14px 15px 14px 45px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); border-radius: 16px; color: white; font-size: 0.9rem; outline: none; transition: all 0.3s ease;">
                 </div>
 
                 <div style="display: flex; gap: 8px; margin-bottom: 25px;">
@@ -547,7 +525,9 @@
                 <div style="width: 50px;"></div>
             </div>
             <div id="game-settings-content" style="padding: 20px; overflow-y: auto; height: calc(100vh - 160px);">
-                <!-- Generated by JS -->
+                <div id="game-settings-dynamic-content">
+                    <!-- Generado por JS: Anotador, Shotgun, Apuestas -->
+                </div>
             </div>
             <div style="padding: 20px; position: absolute; bottom: 0; left: 0; right: 0; background: var(--bg-primary); border-top: 1px solid var(--glass-border);">
                 <button class="action-button" onclick="saveGameSettings()">CONFIRMAR AJUSTES</button>
@@ -586,6 +566,7 @@
     <!-- PREMIUM MODAL (Must be before scripts) -->
     <div id="premium-modal" class="modal-overlay">
         <div class="modal-card">
+            <i class="fas fa-times" id="modal-close-x" style="position: absolute; top: 18px; right: 22px; color: var(--text-secondary); opacity: 0.5; font-size: 1.1rem; cursor: pointer; padding: 5px;" onclick="modal.el().classList.remove('active')"></i>
             <div id="modal-icon" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 15px;"><i class="fas fa-exclamation-circle"></i></div>
             <h3 id="modal-title" style="margin-bottom: 10px;">MENSAJE</h3>
             <p id="modal-message" style="color: var(--text-secondary); margin-bottom: 20px;"></p>
@@ -615,7 +596,7 @@
         <div class="numpad-btn" onclick="numpadInput('.')">.</div>
         <div class="numpad-btn" onclick="numpadInput('0')">0</div>
         <div class="numpad-btn action" onclick="numpadInput('back')"><i class="fas fa-backspace"></i></div>
-        <div class="numpad-btn action" style="grid-column: span 3; background: var(--accent-color); color: white; font-weight: 800;" onclick="closeNumpad()">ACEPTAR</div>
+        <div class="numpad-btn action" style="grid-column: span 3; background: var(--accent-color); color: white; font-weight: 800;" onclick="confirmNumpad()">ACEPTAR</div>
     </div>
 
     <!-- Summary Drawer (Menu Lateral Derecha) -->
