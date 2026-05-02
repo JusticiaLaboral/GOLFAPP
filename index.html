@@ -259,12 +259,6 @@
                         <div style="font-size: 0.55rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; font-weight: 700;">Historial</div>
                     </div>
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 20px;">
-                    <div style="text-align: center;"><div style="font-size: 1rem; font-weight: 800;" id="stat-total">0</div><div style="font-size: 0.5rem; color: var(--text-secondary);">RONDAS</div></div>
-                    <div style="text-align: center;"><div style="font-size: 1rem; font-weight: 800; color: gold;" id="stat-1st">0</div><div style="font-size: 0.5rem; color: var(--text-secondary);">🥇 1er</div></div>
-                    <div style="text-align: center;"><div style="font-size: 1rem; font-weight: 800; color: silver;" id="stat-2nd">0</div><div style="font-size: 0.5rem; color: var(--text-secondary);">🥈 2do</div></div>
-                    <div style="text-align: center;"><div style="font-size: 1rem; font-weight: 800; color: #cd7f32;" id="stat-3rd">0</div><div style="font-size: 0.5rem; color: var(--text-secondary);">🥉 3er</div></div>
-                </div>
             </div>
             <div class="dashboard" style="margin-top: 15px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -535,15 +529,15 @@
         </div>
         
         <!-- FULLSCREEN LANDSCAPE SCORECARD -->
-        <div id="landscape-scorecard-overlay" class="overlay" style="background: #000; z-index: 10000; padding: 0;">
-            <div class="overlay-header" style="background: rgba(0,0,0,0.8); border: none; backdrop-filter: blur(10px);">
-                <div class="back-btn" onclick="closeLandscapeScorecard()" style="background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 12px; margin-left: 10px;">
+        <div id="landscape-scorecard-overlay" class="overlay" style="background: #000; z-index: 10000; padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); padding-top: env(safe-area-inset-top);">
+            <div class="overlay-header" style="background: #121212; border-bottom: 1px solid var(--glass-border); margin-bottom: 0; padding: 15px 0;">
+                <div class="back-btn" onclick="closeLandscapeScorecard()" style="background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 12px; margin-left: 15px;">
                     <i class="fas fa-times"></i> CERRAR
                 </div>
-                <div id="landscape-title" style="flex: 1; text-align: center; font-size: 0.7rem; font-weight: 800; letter-spacing: 2px; color: var(--accent-color);">RESULTADOS DETALLADOS</div>
+                <div id="landscape-title" style="flex: 1; text-align: center; font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; color: var(--accent-color);">RESULTADOS DETALLADOS</div>
                 <div style="width: 80px;"></div>
             </div>
-            <div id="landscape-scorecard-content" style="height: calc(100vh - 70px); width: 100%; overflow: auto; padding: 10px;">
+            <div id="landscape-scorecard-content" style="height: calc(100vh - 65px); width: 100%; overflow: auto; padding: 15px; padding-bottom: 40px;">
                 <!-- Table goes here -->
             </div>
         </div>
@@ -569,7 +563,7 @@
             <i class="fas fa-times" id="modal-close-x" style="position: absolute; top: 18px; right: 22px; color: var(--text-secondary); opacity: 0.5; font-size: 1.1rem; cursor: pointer; padding: 5px;" onclick="modal.el().classList.remove('active')"></i>
             <div id="modal-icon" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 15px;"><i class="fas fa-exclamation-circle"></i></div>
             <h3 id="modal-title" style="margin-bottom: 10px;">MENSAJE</h3>
-            <p id="modal-message" style="color: var(--text-secondary); margin-bottom: 20px;"></p>
+            <div id="modal-message" style="color: var(--text-secondary); margin-bottom: 20px; max-height: 60vh; overflow-y: auto; text-align: left; padding: 0 5px;"></div>
             <div id="modal-input-container" style="display: none; margin-bottom: 20px; width: 100%;">
                 <input type="text" id="modal-input" style="width: 100%; padding: 10px; background: #333; border: 1px solid #444; color: white;">
             </div>
