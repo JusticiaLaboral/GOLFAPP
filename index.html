@@ -25,6 +25,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.9.0/firebase-database-compat.js"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
 </head>
 <body>
     <!-- AUTHENTICATION SCREEN -->
@@ -584,6 +585,7 @@
             </div>
         </div>
 
+        <!-- NOTIFICATION BANNER -->
         <div id="notification-banner" style="position: fixed; top: -150px; left: 15px; right: 15px; padding: 20px; background: rgba(20, 20, 20, 0.9); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; z-index: 10000; transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1); box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);">
             <i class="fas fa-times" id="notif-x" style="position: absolute; top: 15px; right: 20px; color: var(--text-secondary); opacity: 0.5; font-size: 0.9rem; cursor: pointer; padding: 5px;"></i>
             <div style="display: flex; align-items: center; gap: 15px;">
