@@ -231,7 +231,7 @@
             <div id="game-action-buttons" class="padding" style="padding: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
                 <button class="action-button" id="btn-continuar" style="flex: 2; min-width: 150px; background: #4caf50; display: none;" onclick="handleContinuar()">CONTINUAR</button>
                 <button class="action-button" id="btn-finalizar-9" style="flex: 1; min-width: 120px; background: #d14d28; display: none;" onclick="finalizarHoyo9()">FINALIZAR JUGADA</button>
-                <button class="action-button" id="btn-salir-juego" style="flex: 1; min-width: 100px; background: rgba(255,255,255,0.05); border: 1px solid #ff4d4d; color: #ff4d4d;" onclick="abandonarPartida()">SALIR</button>
+                <button class="action-button" id="btn-salir-juego" style="flex: 1; min-width: 100px; background: rgba(255,255,255,0.05); border: 1px solid #ff4d4d; color: #ff4d4d; display: none;" onclick="abandonarPartida()">SALIR</button>
             </div>
             <div id="result-box" class="dashboard" style="margin: 20px; display: none;">
                 <div class="tournament-name" id="result-status"></div>
@@ -605,8 +605,13 @@
     <div id="premium-modal" class="modal-overlay">
         <div class="modal-card">
             <i class="fas fa-times" id="modal-close-x" style="position: absolute; top: 18px; right: 22px; color: var(--text-secondary); opacity: 0.5; font-size: 1.1rem; cursor: pointer; padding: 5px;" onclick="modal.el().classList.remove('active')"></i>
-            <div id="modal-icon" style="font-size: 2rem; color: var(--accent-color); margin-bottom: 15px;"><i class="fas fa-exclamation-circle"></i></div>
-            <h3 id="modal-title" style="margin-bottom: 10px;">MENSAJE</h3>
+            
+            <div id="modal-header-container" style="display: flex; align-items: center; justify-content: center; gap: 15px; margin-bottom: 20px; margin-top: 10px;">
+                <div id="modal-icon" style="font-size: 1.5rem; color: var(--accent-color); margin-bottom: 0;"><i class="fas fa-exclamation-circle"></i></div>
+                <h3 id="modal-title" style="margin: 0; line-height: 1;">MENSAJE</h3>
+                <i id="modal-search-trigger" class="fas fa-search" style="display: none; font-size: 1.1rem; color: var(--text-secondary); cursor: pointer; opacity: 0.6; padding: 5px;" onclick="togglePlayerSearch()"></i>
+            </div>
+
             <div id="modal-message" style="color: var(--text-secondary); margin-bottom: 20px; max-height: 60vh; overflow-y: auto; text-align: left; padding: 0 5px;"></div>
             <div id="modal-input-container" style="display: none; margin-bottom: 20px; width: 100%;">
                 <input type="text" id="modal-input" style="width: 100%; padding: 10px; background: #333; border: 1px solid #444; color: white;">
@@ -647,11 +652,30 @@
             <!-- Se llena dinámicamente -->
         </div>
         
-        <div style="margin-top: 40px; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.05);">
-            <div style="font-size: 0.55rem; color: var(--text-secondary); font-weight: 800; letter-spacing: 2px; margin-bottom: 15px; opacity: 0.6; text-transform: uppercase;">ADMINISTRACIÓN</div>
-            <div class="mode-item" onclick="openGameSettings(); toggleSummary(false);" style="background: rgba(209, 77, 40, 0.05); border: 1px solid rgba(209, 77, 40, 0.1);">
-                <i class="fas fa-sliders-h" style="color: var(--accent-color);"></i>
-                <span style="font-size: 0.75rem; letter-spacing: 0.5px;">AJUSTES DE PARTIDA</span>
+        <div style="margin-top: auto; padding-top: 25px; border-top: 1px solid rgba(255,255,255,0.08); padding-bottom: env(safe-area-inset-bottom);">
+            <div style="font-size: 0.55rem; color: var(--text-secondary); font-weight: 900; letter-spacing: 2px; margin-bottom: 15px; opacity: 0.5; text-transform: uppercase;">ADMINISTRACIÓN</div>
+            
+            <div class="mode-item" onclick="openGameSettings(); toggleSummary(false);" style="background: rgba(209, 77, 40, 0.08); border: 1px solid rgba(209, 77, 40, 0.15); margin-bottom: 12px; height: 50px;">
+                <i class="fas fa-sliders-h" style="color: var(--accent-color); width: 30px; font-size: 1rem;"></i>
+                <span style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.5px; color: white;">AJUSTES DE PARTIDA</span>
+            </div>
+
+            <!-- Submenú ahora arriba del disparador -->
+            <div id="play-status-sub-menu" style="display: none; flex-direction: column; gap: 8px; margin-bottom: 10px; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                <button onclick="abandonarPartida()" style="background: rgba(255, 82, 82, 0.1); border: 1px solid rgba(255, 82, 82, 0.2); color: #ff5252; font-size: 0.65rem; padding: 12px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 900; text-transform: uppercase; width: 100%; outline: none; transition: all 0.2s;">
+                    <i class="fas fa-trash-alt" style="font-size: 0.8rem;"></i> ELIMINAR JUGADA
+                </button>
+                <button onclick="finalizarPartida()" style="background: rgba(76, 175, 80, 0.1); border: 1px solid rgba(76, 175, 80, 0.2); color: #4caf50; font-size: 0.65rem; padding: 12px; border-radius: 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-weight: 900; text-transform: uppercase; width: 100%; outline: none; transition: all 0.2s;">
+                    <i class="fas fa-check-double" style="font-size: 0.8rem;"></i> FINALIZAR Y GUARDAR
+                </button>
+            </div>
+
+            <div class="mode-item" onclick="togglePlayStatusMenu()" style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); margin-bottom: 0; height: 50px;">
+                <div style="width: 30px; height: 30px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-flag-checkered" style="color: var(--accent-color); font-size: 0.9rem;"></i>
+                </div>
+                <span style="font-size: 0.7rem; font-weight: 800; letter-spacing: 0.5px; color: white;">STATUS DE JUGADA</span>
+                <i class="fas fa-chevron-up" id="status-chevron" style="font-size: 0.6rem; margin-left: auto; opacity: 0.5; transition: transform 0.3s ease;"></i>
             </div>
         </div>
     </div>
