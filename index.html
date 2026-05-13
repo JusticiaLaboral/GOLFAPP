@@ -15,7 +15,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0d0d0d">
     
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style.css?v=1.2.38">
     <link rel="stylesheet" href="css/auth_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -400,46 +400,35 @@
                 <div class="overlay-title">NUEVA PARTIDA</div>
                 <div style="width: 50px;"></div>
             </div>
-            <div style="padding: 20px; padding-bottom: 40px; overflow-y: auto;">
-                <div class="dashboard">
-                    <label>Nombre de la Jugada</label>
+            <div style="padding: 15px; padding-bottom: 40px; overflow-y: auto;">
+                <div class="dashboard" style="padding: 15px; margin-bottom: 20px;">
+                    <label style="margin-bottom: 8px;">Nombre de la Jugada</label>
                     <input type="text" id="setup-match-name" placeholder="Ej. Ronda de Apostadores" style="width: 100%; padding: 14px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); border-radius: 16px; color: white; margin-bottom: 20px; font-weight: 600;">
 
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                         <label style="margin-bottom: 0;">Campo</label>
                         <button onclick="authNewCourse()" style="background: transparent; border: none; color: var(--accent-color); font-size: 0.7rem; font-weight: 800; cursor: pointer; text-transform: uppercase; letter-spacing: 1px;"><i class="fas fa-plus-circle"></i> Nuevo Campo</button>
                     </div>
-                    <select id="setup-course-select" onchange="updateTeeOptions()"></select>
+                    <select id="setup-course-select" onchange="updateTeeOptions()" style="width: 100%; padding: 14px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); border-radius: 16px; color: white; font-weight: 600;"></select>
 
                     <div id="setup-tee-container" style="display: none; margin-top: 15px;">
-                        <label>Tee (Mesa)</label>
+                        <label style="margin-bottom: 8px;">Tee (Mesa)</label>
                         <select id="setup-tee-select" style="width: 100%; padding: 14px 20px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--glass-border); border-radius: 16px; color: white; font-weight: 600;"></select>
                     </div>
 
-
-                    <label>Formatos</label>
-                    <div class="game-grid" style="grid-template-columns: 1fr 1fr;">
+                    <label style="margin-top: 15px; margin-bottom: 12px;">Formatos</label>
+                    <div class="game-grid" style="grid-template-columns: 1fr 1fr; gap: 15px;">
                         <div class="game-card mini" id="setup-game-medal" onclick="setSetupGame('Medal')">Medal Play</div>
                         <div class="game-card mini" id="setup-game-wolf" onclick="setSetupGame('Wolf')">Wolf</div>
-                        <div class="game-card mini" id="setup-game-skins" onclick="setSetupGame('Skins')">
-                            Skins
-                        </div>
+                        <div class="game-card mini" id="setup-game-skins" onclick="setSetupGame('Skins')">Skins</div>
                         <div class="game-card mini" onclick="alertPremium('En Desarrollo', 'El modo Stableford estará disponible muy pronto.')" style="opacity: 0.4; position: relative; cursor: not-allowed; border-color: transparent;">
                             Stableford
-                            <div style="position: absolute; top: -6px; right: -6px; background: var(--accent-color); color: white; font-size: 0.45rem; font-weight: 900; padding: 2px 5px; border-radius: 4px; letter-spacing: 1px;">DEV</div>
-                        </div>
-                        <div class="game-card mini" onclick="alertPremium('En Desarrollo', 'El modo Match Play estará disponible muy pronto.')" style="opacity: 0.4; position: relative; cursor: not-allowed; border-color: transparent;">
-                            Match Play
                             <div style="position: absolute; top: -6px; right: -6px; background: var(--accent-color); color: white; font-size: 0.45rem; font-weight: 900; padding: 2px 5px; border-radius: 4px; letter-spacing: 1px;">DEV</div>
                         </div>
                     </div>
                 </div>
 
-                
-
-
                 <button class="action-button" style="margin-top: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--glass-border); font-size: 0.75rem; color: white;" onclick="openGameSettings()"><i class="fas fa-sliders-h" style="margin-right: 8px; color: var(--accent-color);"></i> CONFIGURACIÓN AVANZADA</button>
-                
                 <button class="action-button" style="margin-top: 25px;" onclick="createLiveGame()">EMPEZAR RONDA</button>
             </div>
         </div>
@@ -572,7 +561,7 @@
         </div>
         
         <!-- FULLSCREEN LANDSCAPE SCORECARD -->
-        <div id="landscape-scorecard-overlay" class="overlay" style="background: #000; z-index: 10000; padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); padding-top: env(safe-area-inset-top);">
+        <div id="landscape-scorecard-overlay" class="overlay" style="background: #000; z-index: 10000; display: flex; flex-direction: column; height: 100vh; padding: 0; padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);">
             <div class="overlay-header" style="background: #121212; border-bottom: 1px solid var(--glass-border); margin-bottom: 0; padding: 15px 0;">
                 <div class="back-btn" onclick="closeLandscapeScorecard()" style="background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 12px; margin-left: 15px;">
                     <i class="fas fa-times"></i> CERRAR
@@ -580,7 +569,7 @@
                 <div id="landscape-title" style="flex: 1; text-align: center; font-size: 0.75rem; font-weight: 800; letter-spacing: 2px; color: var(--accent-color);">RESULTADOS DETALLADOS</div>
                 <div style="width: 80px;"></div>
             </div>
-            <div id="landscape-scorecard-content" style="height: calc(100vh - 65px); width: 100%; overflow: auto; padding: 15px; padding-bottom: 40px;">
+            <div id="landscape-scorecard-content" style="flex: 1; width: 100%; overflow: auto; padding: 0;">
                 <!-- Table goes here -->
             </div>
         </div>
@@ -612,7 +601,7 @@
                 <i id="modal-search-trigger" class="fas fa-search" style="display: none; font-size: 1.1rem; color: var(--text-secondary); cursor: pointer; opacity: 0.6; padding: 5px;" onclick="togglePlayerSearch()"></i>
             </div>
 
-            <div id="modal-message" style="color: var(--text-secondary); margin-bottom: 20px; max-height: 60vh; overflow-y: auto; text-align: left; padding: 0 5px;"></div>
+            <div id="modal-message" style="color: var(--text-secondary); margin-bottom: 20px; max-height: 85vh; overflow-y: auto; text-align: left; padding: 0 5px;"></div>
             <div id="modal-input-container" style="display: none; margin-bottom: 20px; width: 100%;">
                 <input type="text" id="modal-input" style="width: 100%; padding: 10px; background: #333; border: 1px solid #444; color: white;">
             </div>
@@ -685,7 +674,7 @@
     <script src="js/engine.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/friends.js"></script>
-    <script src="js/app.js"></script>
+    <script src="js/app.js?v=1.2.40"></script>
     <script>
     if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js');

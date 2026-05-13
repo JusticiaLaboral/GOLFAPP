@@ -1,4 +1,4 @@
-const CACHE_NAME = 'cc-losmochis-v1';
+const CACHE_NAME = 'cc-losmochis-v47';
 const ASSETS = [
   '/',
   '/index.html',
