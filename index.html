@@ -544,25 +544,25 @@
         <div id="history-details-overlay" class="overlay"><div class="overlay-header"><div class="back-btn" onclick="document.getElementById('history-details-overlay').classList.remove('active')"><i class="fas fa-chevron-left"></i> Volver</div></div><div id="history-details-content"></div></div>
         
         <!-- GAME SETTINGS OVERLAY -->
-        <div id="game-settings-overlay" class="overlay" style="z-index: 10000;">
-            <div class="overlay-header">
-                <div class="back-btn" onclick="document.getElementById('game-settings-overlay').classList.remove('active')"><i class="fas fa-chevron-left"></i> Volver</div>
-                <div class="overlay-title">AJUSTES DE PARTIDA</div>
+        <div id="game-settings-overlay" class="overlay" style="z-index: 10000; display: flex; flex-direction: column; padding: 0 !important; overflow: hidden !important; background: var(--bg-color) !important;">
+            <div class="overlay-header" style="flex-shrink: 0; margin: 0 !important; padding: calc(env(safe-area-inset-top, 0px) + 8px) 20px 12px 20px !important; min-height: 0 !important; border: none !important; background: var(--bg-color) !important; display: flex; align-items: center; justify-content: space-between;">
+                <div class="back-btn" onclick="document.getElementById('game-settings-overlay').classList.remove('active')" style="margin: 0 !important; padding: 5px 0 !important; font-size: 0.95rem;"><i class="fas fa-chevron-left"></i> Volver</div>
+                <div class="overlay-title" style="font-size: 1.05rem; font-weight: 800; letter-spacing: 1px; flex: 1; text-align: center;">AJUSTES DE JUGADA</div>
                 <div style="width: 50px;"></div>
             </div>
-            <div id="game-settings-content" style="padding: 20px; overflow-y: auto; height: calc(100vh - 160px);">
-                <div id="game-settings-dynamic-content">
+            <div id="game-settings-content" style="flex: 1; padding: 0 20px 20px 20px; overflow-y: auto; background: var(--bg-color);">
+                <div id="game-settings-dynamic-content" style="margin-top: 5px;">
                     <!-- Generado por JS: Anotador, Shotgun, Apuestas -->
                 </div>
             </div>
-            <div style="padding: 20px; position: absolute; bottom: 0; left: 0; right: 0; background: var(--bg-primary); border-top: 1px solid var(--glass-border);">
-                <button class="action-button" onclick="saveGameSettings()">CONFIRMAR AJUSTES</button>
+            <div style="flex-shrink: 0; padding: 10px 20px; background: var(--bg-color); border: none !important; box-shadow: none !important; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 15px);">
+                <button class="action-button" onclick="saveGameSettings()" style="margin: 0 !important; height: 50px; border: none !important; box-shadow: 0 10px 25px rgba(209, 77, 40, 0.25);">CONFIRMAR AJUSTES</button>
             </div>
         </div>
         
         <!-- FULLSCREEN LANDSCAPE SCORECARD -->
         <div id="landscape-scorecard-overlay" class="overlay" style="background: #000; z-index: 10000; display: flex; flex-direction: column; height: 100vh; padding: 0; padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom);">
-            <div class="overlay-header" style="background: #121212; border-bottom: 1px solid var(--glass-border); margin-bottom: 0; padding: 15px 0;">
+            <div class="overlay-header" style="background: #121212; border-bottom: 1px solid var(--glass-border); margin-bottom: 0; padding: calc(15px + env(safe-area-inset-top, 0px)) 20px 15px 20px;">
                 <div class="back-btn" onclick="closeLandscapeScorecard()" style="background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 12px; margin-left: 15px;">
                     <i class="fas fa-times"></i> CERRAR
                 </div>
@@ -625,10 +625,11 @@
         <div class="numpad-btn" onclick="numpadInput('7')">7</div>
         <div class="numpad-btn" onclick="numpadInput('8')">8</div>
         <div class="numpad-btn" onclick="numpadInput('9')">9</div>
-        <div class="numpad-btn" onclick="numpadInput('.')">.</div>
+        <div class="numpad-btn" onclick="numpadInput('-')">-</div>
         <div class="numpad-btn" onclick="numpadInput('0')">0</div>
+        <div class="numpad-btn" onclick="numpadInput('.')">.</div>
         <div class="numpad-btn action" onclick="numpadInput('back')"><i class="fas fa-backspace"></i></div>
-        <div class="numpad-btn action" style="grid-column: span 3; background: var(--accent-color); color: white; font-weight: 800;" onclick="confirmNumpad()">ACEPTAR</div>
+        <div class="numpad-btn action" style="grid-column: span 2; background: var(--accent-color); color: white; font-weight: 800;" onclick="confirmNumpad()">ACEPTAR</div>
     </div>
 
     <!-- Summary Drawer (Menu Lateral Derecha) -->
